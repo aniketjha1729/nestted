@@ -4,10 +4,8 @@ const RecursiveComponent = ({ typeOfField }) => {
   const [type, setType] = useState("");
   const [showButton, setShowAddButton] = useState(false);
   if (typeOfField === "string" || typeOfField === "boolean") {
-    return null; // stop case
+    return null;
   }
-
-  console.log(type);
 
   const bgImageStyles = {
     paddingLeft: `40px`,
@@ -16,14 +14,24 @@ const RecursiveComponent = ({ typeOfField }) => {
 
   return (
     <div style={{ ...bgImageStyles }}>
-      <select onChange={(e) => setType(e.target.value)}>
+      <select
+        value={type}
+        onChange={(e) => {
+          console.log(e.target.value);
+          setType(e.target.value);
+        }}
+      >
+        <option value="" disabled selected hidden>
+          Type
+        </option>
         <option value="string">string</option>
         <option value="boolean">boolean</option>
         <option value="object">object</option>
       </select>
-      {showButton === false && (
+      {type === "object" && (
         <button onClick={() => setShowAddButton(true)}>+</button>
       )}
+
       {type === "object" && showButton === true && (
         <div className="">
           <span></span>
@@ -35,5 +43,7 @@ const RecursiveComponent = ({ typeOfField }) => {
     </div>
   );
 };
+
+
 
 export default RecursiveComponent;
