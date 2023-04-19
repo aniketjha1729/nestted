@@ -1,4 +1,17 @@
 .App {
-  font-family: sans-serif;
-  text-align: center;
+  padding-top: 10px;
+  height: 100vh;
+  width: 100vw;
+  background-color: bisque;
+  display: flex;
+  justify-content: center;
+}
+
+.ComponentWrapper {
+  background-color: rgb(238, 188, 113);
+  width: 90vw;
+}
+
+.NestedComponentContainer {
+  background-color: rgb(238, 188, 113);
 }
