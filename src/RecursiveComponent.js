@@ -2,22 +2,22 @@ import React, { useState } from "react";
 
 const RecursiveComponent = ({ typeOfField }) => {
   const [type, setType] = useState("");
-  const [showButton, setShowAddButton] = useState(false);
+  // const [showButton, setShowAddButton] = useState(false);
+  const [count, setCount] = useState(0);
   if (typeOfField === "string" || typeOfField === "boolean") {
     return null;
   }
 
   const bgImageStyles = {
-    paddingLeft: `40px`,
-    backgroundColor: "red",
+    paddingLeft: `40px`
   };
 
   return (
-    <div style={{ ...bgImageStyles }}>
+    <div style={{ ...bgImageStyles }} className="Abc">
+      <input type="text" placeholder="text..." className="addButton" />
       <select
         value={type}
         onChange={(e) => {
-          console.log(e.target.value);
           setType(e.target.value);
         }}
       >
@@ -29,21 +29,21 @@ const RecursiveComponent = ({ typeOfField }) => {
         <option value="object">object</option>
       </select>
       {type === "object" && (
-        <button onClick={() => setShowAddButton(true)}>+</button>
+        <button
+          type="button"
+          className="btn btn-secondary py-0"
+          onClick={() => {
+            setCount((prev) => prev + 1);
+          }}
+        >
+          +
+        </button>
       )}
-
-      {type === "object" && showButton === true && (
-        <div className="">
-          <span></span>
-          <span>
-            <RecursiveComponent typeOfField={type} />
-          </span>
-        </div>
-      )}
+      {Array.from({ length: count }).map((el) => {
+        return <RecursiveComponent typeOfField={type} />;
+      })}
     </div>
   );
 };
-
-
 
 export default RecursiveComponent;

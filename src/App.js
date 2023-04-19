@@ -1,33 +1,25 @@
 import "./styles.css";
 import { useState } from "react";
-import { data } from "./data";
-import NestedTextField from "./Abc";
+import NestedTextField from "./RecursiveComponent";
 
 export default function App() {
+  const [numberOfComponent, setNumberOfComponent] = useState(1);
   return (
     <div className="App">
-      <NestedTextField typeOfField="object" />
-      <div style={{ margin: "8px" }}>
-        {/* <RecursiveComponent data={data} /> */}
+      <div className="ComponentWrapper shadow">
+        <button
+          type="button"
+          className="btn btn-primary"
+          onClick={() => setNumberOfComponent((prev) => prev + 1)}
+        >
+          +
+        </button>
+        <div className="NestedComponentContainer p-2">
+          {Array.from({ length: numberOfComponent }).map((el) => {
+            return <NestedTextField typeOfField="object" />;
+          })}
+        </div>
       </div>
     </div>
   );
 }
-
-// const RecursiveComponent = ({ data }) => {
-//   return (
-//     <div style={{ paddingLeft: "20px" }}>
-//       {data.map((parent) => {
-//         return (
-//           <div key={parent.name}>
-//             <span>{parent.name}</span>
-//             {/* Base Condition and Rendering recursive component from inside itself */}
-//             <div>
-//               {parent.children && <RecursiveComponent data={parent.children} />}
-//             </div>
-//           </div>
-//         );
-//       })}
-//     </div>
-//   );
-// };
